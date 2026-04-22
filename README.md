@@ -9,7 +9,7 @@
 **TRIED BOTH REGULAR NORMALIZE/SCALE AND SCTRANSFORM SEPARATELY**   
 **- 02.** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)     
 **- MCC 02.** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*    
-    **- SCT 03.** Finding markers and annotating cells on SCTransformed obj      
+  **- SCT 03.** Finding markers and annotating cells on SCTransformed obj      
  
 
 **Important Notes:**    
