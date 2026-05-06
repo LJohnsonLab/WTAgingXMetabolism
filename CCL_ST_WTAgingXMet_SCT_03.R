@@ -2,15 +2,15 @@
 # Name: CCL_ST_WTAgingXMet_SCT_03.R
 # Project: Wildtype Aging Cerebral Metabolism
 # Purpose: Analysis of 4 different age groups(16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
-#         - 01. creating xenium objs, subsetting (nCount > 5), merging files, attaching metadata
-#         - 02. subsetting (nCount > 5), merging files, attaching metadata, preprocessing *** ONLY TO BE RUN ON MCC ***
 #         - 03. 
-#         - 04. 
-#         - 05.  
+#             - 01
+#             - 02 
+#             - 03
+#             - 04  
 # Input Files:  
 # Output Files: 
 # Date created: 4/15/26
-# Last updated: 4/22/26
+# Last updated: 4/24/26
 # Author: Chloe Lucido
 ########################################################################
 
@@ -59,11 +59,11 @@ WTmerged.obj.markers |>
   slice_head(n = 5) |>
   ungroup() -> top5_WT_xenium
 
-write_csv(top5_WT_xenium, "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/csv/cluster_markers/20260422_top5_WT_xenium_res05.csv")
+write_csv(top5_WT_xenium, "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/csv/cluster_markers/20260422_SCT_top5_WT_xenium_res05.csv")
 
 table(WTmerged.obj$seurat_clusters)
 
-ggsave(filename = "20260422_allcells_UMAP_res05.png", plot = UMAP_v1, path = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/figs/UMAPs/", width = 9, height = 10)
+ggsave(filename = "20260422_allcells_SCT_UMAP_res05.png", plot = UMAP_v1, path = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/figs/UMAPs/", width = 9, height = 10)
 
 # saving res0.5 clusters in metadata 
 WTmerged.obj$res05_clusters <- Idents(WTmerged.obj)
@@ -82,9 +82,9 @@ WTmerged.obj.markers |>
   slice_head(n = 5) |>
   ungroup() -> top5_WT_xenium04
 
-write_csv(top5_WT_xenium04, "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/csv/cluster_markers/20260422_top5_WT_xenium_res04.csv")
+write_csv(top5_WT_xenium04, "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/csv/cluster_markers/20260422_SCT_top5_WT_xenium_res04.csv")
 
-ggsave(filename = "20260422_allcells_UMAP_res04.png", plot = UMAP_v2, path = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/figs/UMAPs/", width = 9, height = 10)
+ggsave(filename = "20260422_allcells_SCT_UMAP_res04.png", plot = UMAP_v2, path = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/figs/UMAPs/", width = 9, height = 10)
 
 # saving res 0.4 clusters in metadata 
 WTmerged.obj$res04_clusters <- Idents(WTmerged.obj)
@@ -103,9 +103,9 @@ WTmerged.obj.markers |>
   slice_head(n = 5) |>
   ungroup() -> top5_WT_xenium03
 
-write_csv(top5_WT_xenium03, "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/csv/cluster_markers/20260422_top5_WT_xenium_res03.csv")
+write_csv(top5_WT_xenium03, "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/csv/cluster_markers/20260422_SCT_top5_WT_xenium_res03.csv")
 
-ggsave(filename = "20260422_allcells_UMAP_res03.png", plot = UMAP_v3, path = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/figs/UMAPs/", width = 9, height = 10)
+ggsave(filename = "20260422_allcells_SCT_UMAP_res03.png", plot = UMAP_v3, path = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/figs/UMAPs/", width = 9, height = 10)
 
 # saving res 0.3 clusters in metadata 
 WTmerged.obj$res03_clusters <- Idents(WTmerged.obj)

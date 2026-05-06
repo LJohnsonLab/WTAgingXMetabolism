@@ -1,12 +1,17 @@
 ########################################################################
-# Name: CCL_ST_MCC_WTAgingXMet_02.R
+# Name: CCL_ST_MCC_WTAgingXMet_02.R **ONLY TO BE RUN ON SUPERCOMPUTER (MMC)**
 # Project: Wildtype Aging Cerebral Metabolism
 # Purpose: Analysis of 4 different age groups(16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
-#         - MCC 02.  
-# Input Files:  
-# Output Files: 
+#         - MCC 02. merging objs, attaching metadata, and running SCTransform using MCC 
+#             - 01 merge objs and subset nCount>5
+#             - 02 save merged obj (no metadata) => 20260421_mergedobj_no_metadata.qs2
+#             - 03 attach metadata (xlsx) to merged obj
+#             - 04 Processing (SCTransform)
+#             - 05 save SCTransformed merged obj => 20260421_mergedobj_SCT.qs2
+# Input Files: individual objs from part 1
+# Output Files: SCTransformed merged obj => 20260421_mergedobj_SCT.qs2
 # Date created: 4/15/26
-# Last updated: 4/22/26
+# Last updated: 4/24/26
 # Author: Chloe Lucido
 ########################################################################
 
@@ -131,7 +136,7 @@ meta <- column_to_rownames(meta, var = "cell_id")
 WTmerged.obj@meta.data <- meta
 
 
-# 04. Preprocessing ----
+# 04. Processing ----
 
 WTmerged.obj <- UpdateSeuratObject(WTmerged.obj)
 
@@ -150,5 +155,6 @@ WTmerged.obj <- FindNeighbors(WTmerged.obj, reduction = "pca", dims = 1:30)
 WTmerged.obj <- FindClusters(WTmerged.obj, resolution = 0.5, graph.name = "SCT_snn")
 
 
+# 05. Save SCTransformed merged obj ----
 qs_save(WTmerged.obj, "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/20260421_mergedobj_SCT.qs2") 
 
