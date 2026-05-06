@@ -10,9 +10,9 @@
 **- 02.** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)     
 **- MCC 02.** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*    
 **- SCT 03.** Finding markers and annotating cells on SCTransformed obj      
-**- 03. ** Annotating all cells       
-**- 04. ** Subsetting, subclustering, and annotating neuronal subtypes      
-**-05. ** Subsetting, subclustering, and annotating vascular mural cell types      
+**- 03.** Annotating all cells       
+**- 04.** Subsetting, subclustering, and annotating neuronal subtypes      
+**- 05.** Subsetting, subclustering, and annotating vascular mural cell types      
  
 
 **Important Notes:**    
