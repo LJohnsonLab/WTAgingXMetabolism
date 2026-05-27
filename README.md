@@ -9,8 +9,13 @@
 **TRIED BOTH REGULAR NORMALIZE/SCALE AND SCTRANSFORM SEPARATELY**   
 **- 02.** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)     
 **- MCC 02.** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*    
-**- SCT 03.** Finding markers and annotating cells on SCTransformed obj      
-**- 03.** Annotating all cells       
+**INTEGRATION SCRIPTS**       
+**- MCC_int 02_1** Creating object list split by slide and SCT on each for RPCA integration *ONLY TO BE RUN ON SUPERCOMPUTER*        
+**- MCC_int 02_2** Integrating using RPCA *ONLY TO BE RUN ON SUPERCOMPUTER*      
+**- MCC_harmonyint 03.** Integrating using harmony method *ONLY TO BE RUN ON SUPERCOMPUTER*         
+**ANNOTATION SCRIPTS**        
+**- SCT 03.** Finding markers and annotating cells on SCTransformed obj         
+**- 03.** Annotating all cells on log normalize and scaled obj              
 **- 04.** Subsetting, subclustering, and annotating neuronal subtypes      
 **- 05.** Subsetting, subclustering, and annotating vascular mural cell types      
  
