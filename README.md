@@ -15,7 +15,7 @@
 **- 02.** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)    
 
 #### SCTransform       
-**- MCC 02.** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*      
+**- _MCC 02._** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*      
 
 #### SpaNorm      
 **- SpaNorm 02.** Running SpaNorm per slide, and creating slide objlist with corresponding SpaNorm assay attached and merged obj with merged SpaNorm assay attached         
