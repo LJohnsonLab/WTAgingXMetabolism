@@ -8,7 +8,9 @@
 
 Scripts:        
 **- 01.** Creating xenium objs for each slide (7 objs total)    
-**TRIED BOTH REGULAR NORMALIZE/SCALE AND SCTRANSFORM SEPARATELY**   
+**NORMALIZATION METHODS**      
+     NORMALIZE AND SCALEDATA         
+     
 **- 02.** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)     
 **- MCC 02.** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*    
 **INTEGRATION SCRIPTS**       
