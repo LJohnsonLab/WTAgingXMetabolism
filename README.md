@@ -8,11 +8,19 @@
 
 ## Scripts:        
 **- 01.** Creating xenium objs for each slide (7 objs total)    
-### **NORMALIZATION METHODS**        
-#### Normalize and Scaledata 
-     
-**- 02.** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)     
-**- MCC 02.** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*    
+
+### **NORMALIZATION METHODS**         
+
+#### Normalize and Scaledata           
+**- 02.** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)    
+
+#### SCTransform       
+**- MCC 02.** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*      
+
+#### SpaNorm      
+**- SpaNorm 02.** Running SpaNorm per slide, and creating slide objlist with corresponding SpaNorm assay attached and merged obj with merged SpaNorm assay attached         
+**- MCC SpaNormprocessing_noint 03.** Processing merged obj using SpaNorm assay (scaleData -> dim reductions) NO INTEGRATION        
+
 **INTEGRATION SCRIPTS**       
 **- MCC_int 02_1** Creating object list split by slide and SCT on each for RPCA integration *ONLY TO BE RUN ON SUPERCOMPUTER*        
 **- MCC_int 02_2** Integrating using RPCA *ONLY TO BE RUN ON SUPERCOMPUTER*      
