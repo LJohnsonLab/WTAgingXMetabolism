@@ -6,10 +6,10 @@
 **Project:** Wildtype Aging Cerebral Metabolism         
 **Purpose:** Analysis of 4 different age groups(16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data        
 
-Scripts:        
+## Scripts:        
 **- 01.** Creating xenium objs for each slide (7 objs total)    
-**NORMALIZATION METHODS**      
-> Normalize and Scaledata 
+### **NORMALIZATION METHODS**        
+#### Normalize and Scaledata 
      
 **- 02.** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)     
 **- MCC 02.** Merging all objs and processing (SCTransform) *ONLY TO BE RUN ON SUPERCOMPUTER*    
