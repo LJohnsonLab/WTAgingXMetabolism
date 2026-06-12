@@ -45,7 +45,7 @@
 
 **- _MCC_SpaNorm_RPCA 03._** Running reference-based RPCA integration on SpaNorm obj split by sample, processing and findmarkers           
 **- _MCC_SpaNorm_RPCA 04._** Creating feature plots, UMAPs and imagedimplots for annotation of SpaNorm RPCA integrated obj    
-**- _MCC_SpaNorm_RPCA 05._** Subclustering clusters 9 and 18 and annotating         
+**- _MCC_SpaNorm_RPCA 05._** Subclustering clusters 9, 18, 1, and 3       
 
 
 
