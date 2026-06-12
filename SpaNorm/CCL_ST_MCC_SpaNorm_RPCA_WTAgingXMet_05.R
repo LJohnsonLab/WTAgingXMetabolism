@@ -2,7 +2,7 @@
 # Name: CCL_ST_SpaNorm_RPCA_WTAgingXMet_04.R
 # Project: Wildtype Aging Cerebral Metabolism
 # Purpose: Analysis of 4 different age groups (16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
-#         - SpaNorm 04. subclustering clusters 9 and 18 
+#         - SpaNorm 04. subclustering clusters 9, 18, 1 and 3 
 #             - 01 
 #             - 02 
 #             - 03 
@@ -14,7 +14,7 @@
 # Input Files:   
 # Final Output Files: 
 # Date created: 6/9/26
-# Last updated: 6/9/26
+# Last updated: 6/12/26 (updated description and got rid of #)
 # Author: Chloe Lucido
 ########################################################################
 
@@ -74,17 +74,17 @@ root_path_to_obj <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/202
 output_path <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/"
 fig_output_path <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/SpaNorm_RPCA_figs/"
 csv_output_path <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/SpaNorm_cluster_markers/"
-date <- "20260609_"
+date <- "20260610_"
 #######################
 
 
 # read in obj ----
-#SpaNorm_RPCA.obj <- qs_read(root_path_to_obj)
+SpaNorm_RPCA.obj <- qs_read(root_path_to_obj)
 
-#Idents(SpaNorm_RPCA.obj) <- "clusters_res05"
+Idents(SpaNorm_RPCA.obj) <- "clusters_res05"
 
 # print out graph names 
-#print(SpaNorm_RPCA.obj@graphs)
+print(SpaNorm_RPCA.obj@graphs)
 
 #output:
 #$integrated_nn
@@ -94,66 +94,158 @@ date <- "20260609_"
 
 # Find sub clusters for cluster 9
 # cluster 9 has VLMC, BAM and fibroblast markers in top10, also hits for astro markers (Gfap, Aldh1l1, and Aqp4)
-#SpaNorm_RPCA.obj <- FindSubCluster(SpaNorm_RPCA.obj, cluster = "9", resolution = 0.2, graph.name = "integrated_snn")
+SpaNorm_RPCA.obj <- FindSubCluster(SpaNorm_RPCA.obj, cluster = "9", resolution = 0.2, graph.name = "integrated_snn")
 
-#print(levels(Idents(SpaNorm_RPCA.obj)))
+print(levels(Idents(SpaNorm_RPCA.obj)))
 
-#print(colnames(SpaNorm_RPCA.obj@meta.data))
+print(colnames(SpaNorm_RPCA.obj@meta.data))
 
-#Idents(SpaNorm_RPCA.obj) <- "sub.cluster"
+Idents(SpaNorm_RPCA.obj) <- "sub.cluster"
 
-#print(levels(Idents(SpaNorm_RPCA.obj)))
+print(levels(Idents(SpaNorm_RPCA.obj)))
 
-#SpaNorm_RPCA.obj$clusters_sub9 <- Idents(SpaNorm_RPCA.obj)
+SpaNorm_RPCA.obj$clusters_sub9 <- Idents(SpaNorm_RPCA.obj)
 
-#Idents(SpaNorm_RPCA.obj) <- "clusters_sub9"
+Idents(SpaNorm_RPCA.obj) <- "clusters_sub9"
 
 # find subclusters for cluster 18
 # cluster 18 has multiple neuronal-type markers and oligo markers, but clusters with oligos on UMAP 
-#SpaNorm_RPCA.obj <- FindSubCluster(SpaNorm_RPCA.obj, cluster = "18", resolution = 0.2, graph.name = "integrated_snn")
+SpaNorm_RPCA.obj <- FindSubCluster(SpaNorm_RPCA.obj, cluster = "18", resolution = 0.2, graph.name = "integrated_snn")
 
-#Idents(SpaNorm_RPCA.obj) <- "sub.cluster"
+Idents(SpaNorm_RPCA.obj) <- "sub.cluster"
 
-#print(levels(Idents(SpaNorm_RPCA.obj)))
+print(levels(Idents(SpaNorm_RPCA.obj)))
 
-#SpaNorm_RPCA.obj$clusters_sub9_18 <- Idents(SpaNorm_RPCA.obj)
+SpaNorm_RPCA.obj$clusters_sub9_18 <- Idents(SpaNorm_RPCA.obj)
 
-#Idents(SpaNorm_RPCA.obj) <- "clusters_sub9_18"
+Idents(SpaNorm_RPCA.obj) <- "clusters_sub9_18"
 
 # need to joinlayers for FindAllMarkers to work
-#SpaNorm_RPCA.obj <- JoinLayers(SpaNorm_RPCA.obj)
+SpaNorm_RPCA.obj <- JoinLayers(SpaNorm_RPCA.obj)
 
 # find markers
 
-#SpaNorm_RPCA.submarkers <- FindAllMarkers(SpaNorm_RPCA.obj, group.by = "clusters_sub9_18")
+SpaNorm_RPCA.submarkers <- FindAllMarkers(SpaNorm_RPCA.obj, group.by = "clusters_sub9_18")
 
-#print(colnames(SpaNorm_RPCA.submarkers))
+print(colnames(SpaNorm_RPCA.submarkers))
 
-#SpaNorm_RPCA.submarkers |>
-#  group_by(cluster) |>
-#  dplyr::filter(p_val_adj < 0.05) |>
-#  arrange(desc(avg_log2FC)) |>
-#  slice_head(n = 10) |>
-#  ungroup() -> top10_sub
+SpaNorm_RPCA.submarkers |>
+  group_by(cluster) |>
+  dplyr::filter(p_val_adj < 0.05) |>
+  arrange(desc(avg_log2FC)) |>
+  slice_head(n = 10) |>
+  ungroup() -> top10_sub
 
-#write_csv(top10_sub, paste0(csv_output_path, date, "top10_SpaNormRPCA_sub9_18.csv"))
+write_csv(top10_sub, paste0(csv_output_path, date, "top10_SpaNormRPCA_sub9_18.csv"))
 
 # figures 
-#UMAP_sub <- DimPlot(SpaNorm_RPCA.obj, group.by = "clusters_sub9_18", cols = "polychrome")
-#imgdim_sub <- ImageDimPlot(SpaNorm_RPCA.obj, split.by = "clusters_sub9_18", cols = "polychrome")
+UMAP_sub <- DimPlot(SpaNorm_RPCA.obj, group.by = "clusters_sub9_18", cols = "polychrome")
+imgdim_sub <- ImageDimPlot(SpaNorm_RPCA.obj, split.by = "clusters_sub9_18", cols = "polychrome")
 
 
 # save figures
-#ggsave(filename = paste0(date, "SpaNormRPCA_UMAP_sub9_18.png"), plot = UMAP_sub, path = fig_output_path, width = 11, height = 10)
-#ggsave(filename = paste0(date, "SpaNormRPCA_imgdim_sub9_18.png"), plot = imgdim_sub, path = fig_output_path, width = 11, height = 10)
+ggsave(filename = paste0(date, "SpaNormRPCA_UMAP_sub9_18.png"), plot = UMAP_sub, path = fig_output_path, width = 11, height = 10)
+ggsave(filename = paste0(date, "SpaNormRPCA_imgdim_sub9_18.png"), plot = imgdim_sub, path = fig_output_path, width = 11, height = 10)
 
 # save object with subcluster info for clusters 9 and 18
-#qs_save(SpaNorm_RPCA.obj, paste0(output_path, date, "SpaNorm_RPCAint_processed.qs2"))
+qs_save(SpaNorm_RPCA.obj, paste0(output_path, date, "SpaNorm_RPCAint_processed.qs2"))
 
 # check cell counts across subclusters 
-SpaNorm_RPCA.obj <- qs_read(paste0(output_path, date, "SpaNorm_RPCAint_processed.qs2"))
+SpaNorm_RPCA.obj <- qs_read(paste0(output_path, "20260609_SpaNorm_RPCAint_processed.qs2"))
 
 print(table(SpaNorm_RPCA.obj$clusters_sub9_18))
 
 print(table(SpaNorm_RPCA.obj$clusters_sub9_18, SpaNorm_RPCA.obj$sample_ID))
+
+# FURTHER SUBCLUSTERING
+## subclustering 18_0 and 18_1 => only half of these clusters hit for canonical oligo markers (based on feature plots)
+## subclustering 1 to try and get rid of the cells that are clustering with cluster 2 => these cells are hitting heavily for both canonical oligo and endo markers (clearly segmentation artifacts)
+## subclustering 3 (astrocytes) because some cells are clustering with 18_0 and 18_1 (bad oligo clusters), those same cells aren't hitting heavily with the canonical astro markers 
+
+# subclustering 18_0
+Idents(SpaNorm_RPCA.obj) <- "clusters_sub9_18"
+
+SpaNorm_RPCA.obj <- FindSubCluster(SpaNorm_RPCA.obj, cluster = "18_0", resolution = 0.1, graph.name = "integrated_snn")
+
+Idents(SpaNorm_RPCA.obj) <- "sub.cluster"
+
+SpaNorm_RPCA.obj$clusters_sub18_0 <- Idents(SpaNorm_RPCA.obj)
+
+Idents(SpaNorm_RPCA.obj) <- "clusters_sub18_0"
+
+
+# subclustering 18_1
+SpaNorm_RPCA.obj <- FindSubCluster(SpaNorm_RPCA.obj, cluster = "18_1", resolution = 0.1, graph.name = "integrated_snn")
+
+Idents(SpaNorm_RPCA.obj) <- "sub.cluster"
+
+SpaNorm_RPCA.obj$clusters_sub18_0and1 <- Idents(SpaNorm_RPCA.obj)
+
+Idents(SpaNorm_RPCA.obj) <- "clusters_sub18_0and1"
+
+
+# subclustering 1 
+SpaNorm_RPCA.obj <- FindSubCluster(SpaNorm_RPCA.obj, cluster = "1", resolution = 0.2, graph.name = "integrated_snn")
+
+Idents(SpaNorm_RPCA.obj) <- "sub.cluster"
+
+SpaNorm_RPCA.obj$clusters_sub1 <- Idents(SpaNorm_RPCA.obj)
+
+Idents(SpaNorm_RPCA.obj) <- "clusters_sub1"
+
+# subclustering 3
+SpaNorm_RPCA.obj <- FindSubCluster(SpaNorm_RPCA.obj, cluster = "3", resolution = 0.2, graph.name = "integrated_snn")
+
+Idents(SpaNorm_RPCA.obj) <- "sub.cluster"
+
+SpaNorm_RPCA.obj$clusters_sub3 <- Idents(SpaNorm_RPCA.obj)
+
+Idents(SpaNorm_RPCA.obj) <- "clusters_sub3"
+
+# Find Markers 
+
+# need to joinlayers for FindAllMarkers to work
+SpaNorm_RPCA.obj <- JoinLayers(SpaNorm_RPCA.obj)
+
+SpaNorm_RPCA.submarkers <- FindAllMarkers(SpaNorm_RPCA.obj, group.by = "clusters_sub3")
+
+print(colnames(SpaNorm_RPCA.submarkers))
+
+SpaNorm_RPCA.submarkers |>
+  group_by(cluster) |>
+  dplyr::filter(p_val_adj < 0.05) |>
+  arrange(desc(avg_log2FC)) |>
+  slice_head(n = 10) |>
+  ungroup() -> top10_sub
+
+write_csv(top10_sub, paste0(csv_output_path, date, "top10_SpaNormRPCA_sub18_0_18_1_1_3.csv"))
+
+# figures 
+UMAP_sub <- DimPlot(SpaNorm_RPCA.obj, group.by = "clusters_sub3", cols = "polychrome", label = T)
+imgdim_split_sub <- ImageDimPlot(SpaNorm_RPCA.obj, split.by = "clusters_sub3", cols = "polychrome")
+imgdim_sub <- ImageDimPlot(SpaNorm_RPCA.obj, group.by = "clusters_sub3", cols = "polychrome")
+
+# save figures 
+ggsave(filename = paste0(date, "SpaNormRPCA_UMAP_sub18_0_18_1_1_3.png"), plot = UMAP_sub, path = fig_output_path, width = 11, height = 10)
+ggsave(filename = paste0(date, "SpaNormRPCA_imgdim_sub18_0_18_1_1_3.png"), plot = imgdim_sub, path = fig_output_path, width = 11, height = 10)
+ggsave(filename = paste0(date, "SpaNormRPCA_imgdim_split_sub18_0_18_1_1_3.png"), plot = imgdim_split_sub, path = fig_output_path, width = 11, height = 10)
+
+# print cell counts per cluster 
+print(table(SpaNorm_RPCA.obj$clusters_sub3))
+
+# save obj
+qs_save(SpaNorm_RPCA.obj, paste0(output_path, date, "SpaNorm_RPCAint_processed_subclustered.qs2"))
+
+# read in last obj
+SpaNorm_RPCA.obj <- qs_read(paste0(output_path, date, "SpaNorm_RPCAint_processed_subclustered.qs2"))
+
+UMAP_sub <- DimPlot(SpaNorm_RPCA.obj, group.by = "clusters_sub3")
+imgdim_split_sub <- ImageDimPlot(SpaNorm_RPCA.obj, split.by = "clusters_sub3")
+imgdim_sub <- ImageDimPlot(SpaNorm_RPCA.obj, group.by = "clusters_sub3")
+
+# save figures
+ggsave(filename = paste0(date, "SpaNormRPCA_UMAP_sub18_0_18_1_1_3.png"), plot = UMAP_sub, path = fig_output_path, width = 11, height = 10)
+ggsave(filename = paste0(date, "SpaNormRPCA_imgdim_sub18_0_18_1_1_3.png"), plot = imgdim_sub, path = fig_output_path, width = 11, height = 10)
+ggsave(filename = paste0(date, "SpaNormRPCA_imgdim_split_sub18_0_18_1_1_3.png"), plot = imgdim_split_sub, path = fig_output_path, width = 11, height = 10)
+
 
