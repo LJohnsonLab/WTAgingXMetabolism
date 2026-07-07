@@ -7,14 +7,16 @@
 **Purpose:** Analysis of 4 different age groups(16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data        
 
 **Notes:**              
-- MCC denotes scripts run using the supercomputer 
+- MCC denotes scripts run using the supercomputer
 
-## **SpaNorm/**      
+## Scripts:      
+
+### **SpaNorm/**      
 
 **- _SpaNorm 02._** Running SpaNorm per sample, and creating sample objlist with corresponding SpaNorm assay attached and merged obj with merged SpaNorm assay attached     
 **- _MCC_SpaNormprocessing_noint 03._** Processing merged obj using SpaNorm assay (scaleData -> dim reductions) - NO INTEGRATION        
 
-### Reference RPCA       
+#### Reference RPCA       
 
 **- _MCC_SpaNorm_RPCA 03._** Running reference-based RPCA integration on SpaNorm obj split by sample, processing and findmarkers           
 **- _MCC_SpaNorm_RPCA 04._** Creating feature plots, UMAPs and imagedimplots for annotation of SpaNorm RPCA integrated obj    
