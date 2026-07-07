@@ -36,19 +36,6 @@
 **- _MCC_harmonyint_03_v2_** Integrating SCTransformed object using harmony         
 
 
-### **SpaNorm/**      
-
-**- _SpaNorm 02._** Running SpaNorm per sample, and creating sample objlist with corresponding SpaNorm assay attached and merged obj with merged SpaNorm assay attached     
-**- _MCC_SpaNormprocessing_noint 03._** Processing merged obj using SpaNorm assay (scaleData -> dim reductions) - NO INTEGRATION        
-
-#### Reference RPCA       
-
-**- _MCC_SpaNorm_RPCA 03._** Running reference-based RPCA integration on SpaNorm obj split by sample, processing and findmarkers           
-**- _MCC_SpaNorm_RPCA 04._** Creating feature plots, UMAPs and imagedimplots for annotation of SpaNorm RPCA integrated obj    
-**- _MCC_SpaNorm_RPCA 05._** Subclustering clusters 9, 18, 1, and 3       
-
-
-
 **Important Notes:**    
 
 **R session and packages Info**   
