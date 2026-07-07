@@ -1,5 +1,5 @@
 ########################################################################
-# Name: CCL_ST_SpaNorm_RPCA_WTAgingXMet_04.R
+# Name: CCL_ST_MCC_SpaNorm_RPCA_WTAgingXMet_04.R
 # Project: Wildtype Aging Cerebral Metabolism
 # Purpose: Analysis of 4 different age groups (16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
 #         - SpaNorm 04.  annotating SpaNorm RPCA integrated obj
@@ -14,7 +14,7 @@
 # Input Files:   
 # Final Output Files: 
 # Date created: 6/8/26
-# Last updated: 6/8/26
+# Last updated: 6/10/26
 # Author: Chloe Lucido
 ########################################################################
 

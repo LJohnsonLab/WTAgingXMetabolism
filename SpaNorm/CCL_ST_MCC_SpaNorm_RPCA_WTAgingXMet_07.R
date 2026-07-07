@@ -3,18 +3,10 @@
 # Project: Wildtype Aging Cerebral Metabolism
 # Purpose: Analysis of 4 different age groups (16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
 #         - 06. making UMAPs, imgdimplots, and calculating cell proportions btwn groups for both gen and fine celltypes  
-#             - 01 
-#             - 02 
-#             - 03 
-#             - 04 
-#             - 05  
-#             - 06  
-#             - 07  
-#             - 08  
 # Input Files: 
 # Final Output Files: 
 # Date created: 6/14/26
-# Last updated: 6/16/26
+# Last updated: 7/7/26
 # Author: Chloe Lucido
 ########################################################################
 
@@ -71,7 +63,7 @@ input_obj <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/20260612_S
 fig_path <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/SpaNorm_RPCA_figs/"
 output_path <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/"
 cellprops_outputpath <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/output/propeller_cellprops/"
-date <- "20260616_"
+date <- "20260623_"
 ###########################
 
 
@@ -81,9 +73,9 @@ SpaNorm_RPCA.obj <- qs_read(input_obj)
 # fix L3 ET neuron name
 Idents(SpaNorm_RPCA.obj) <- "fine_celltype"
 
-
-# after looking at  split image dim plot, i realized that what I annotated as L3 ET neurons is actually hippocampal neurons
-# changing this annotation to reflect this
+# NOTE:
+## after looking at  split image dim plot, i realized that what I annotated as L3 ET neurons is actually hippocampal neurons
+## changing this annotation to reflect this
 SpaNorm_RPCA.obj <- RenameIdents(SpaNorm_RPCA.obj, 
                                  "L3 ET Neuron" = "Hippocampal neuron")
 
@@ -198,23 +190,35 @@ fine_col_palette <- c(
 )
 
 # SANITY CHECK
-levels(SpaNorm_RPCA.obj$gen_celltype)
-table(SpaNorm_RPCA.obj$gen_celltype)
+#levels(SpaNorm_RPCA.obj$gen_celltype)
 
+# [1] "Neuron"           "Astrocyte"        "Oligodendrocyte"  "OPC"             
+# [5] "Microglia"        "T cell"           "Endothelial cell" "Pericyte"        
+# [9] "Vascular mural"   "Ependymal cell"   "Choroid plexus"  
+
+#table(SpaNorm_RPCA.obj$gen_celltype)
+#          Neuron        Astrocyte  Oligodendrocyte              OPC 
+#          739646           194195           304879            47206 
+#       Microglia           T cell Endothelial cell         Pericyte 
+#           53886             1160           106701            29778 
+#  Vascular mural   Ependymal cell   Choroid plexus 
+#           94088            21532            12009 
+
+  
 library(SCP) # for pretty UMAPs
 # make figures 
 
 ## gen cell type UMAP ---- 
-#gen_UMAP <- CellDimPlot(
-#  srt = SpaNorm_RPCA.obj,
-#  group.by = "gen_celltype",
-#  reduction = "umap",
-#  theme_use = "theme_blank",
-#  pt.size = 0.6
-#) + scale_color_manual(values = gen_col_palette) +
-#                      guides(color = guide_legend(title = NULL, # remove legend title
-#                                                    ncol = 1, # keep legend in 1 column
-#                                                    override.aes = list(size = 3))) # legend dot size
+gen_UMAP <- CellDimPlot(
+  srt = SpaNorm_RPCA.obj,
+  group.by = "gen_celltype",
+  reduction = "umap",
+  theme_use = "theme_blank",
+  pt.size = 0.6
+) + scale_color_manual(values = gen_col_palette) +
+                      guides(color = guide_legend(title = NULL, # remove legend title
+                                                    ncol = 1, # keep legend in 1 column
+                                                    override.aes = list(size = 3))) # legend dot size
 
 ## fine_celltype UMAP ----
 fine_UMAP <- CellDimPlot(
@@ -229,11 +233,11 @@ fine_UMAP <- CellDimPlot(
                                                     override.aes = list(size = 3))) # legend dot size
 
 ## gen grouped img dim plot ----
-#gen_imagedim_fov1 <- ImageDimPlot(SpaNorm_RPCA.obj,
-#                              group.by = "gen_celltype",
-#                              cols = gen_col_palette,
-#                              dark.background = F,
-#                              fov = "fov") + labs(fill = NULL)
+gen_imagedim_fov1 <- ImageDimPlot(SpaNorm_RPCA.obj,
+                              group.by = "gen_celltype",
+                              cols = gen_col_palette,
+                              dark.background = F,
+                              fov = "fov") + labs(fill = NULL)
 
 ## gen split imgdimplot ----
 gen_imagedim_splitfov1 <- ImageDimPlot(SpaNorm_RPCA.obj,
@@ -251,6 +255,164 @@ fine_imagedim_fov1 <- ImageDimPlot(SpaNorm_RPCA.obj,
                               dark.background = F,
                               fov = "fov") + labs(fill = NULL)
 
+# look at images/image names that the object has 
+#Images(SpaNorm_RPCA.obj)
+
+# [1] "fov"      "fov.2"    "fov.2.3"  "fov.2.4"  "fov.2.5"  "fov.3"
+# [7] "fov.3.7"  "fov.3.8"  "fov.4"    "fov.4.10" "fov.4.11" "fov.5"
+# [13] "fov.5.13" "fov.5.14" "fov.5.15" "fov.6"    "fov.6.17" "fov.6.18"
+# [19] "fov.7"    "fov.7.20" "fov.7.21" "fov.7.22" "fov.7.23" "fov.7.24"
+
+#table(SpaNorm_RPCA.obj$sample_ID, SpaNorm_RPCA.obj$slide_ID)
+ 
+#         0021991 0021998 0021999 0022573 0069039 0069045 0069118
+#16wk_F1       0   66873       0       0       0       0       0
+#16wk_F2       0       0       0       0       0       0   64244
+#16wk_F4       0       0       0       0       0   63103       0
+#16wk_M1   69680       0       0       0       0       0       0
+#16wk_M2       0   71756       0       0       0       0       0
+#16wk_M4       0       0       0       0   58033       0       0
+#36wk_F1   67485       0       0       0       0       0       0
+#36wk_F3       0       0       0       0       0   67618       0
+#36wk_F4       0       0       0       0       0       0   67001
+#36wk_M1       0   65784       0       0       0       0       0
+#36wk_M2   75848       0       0       0       0       0       0
+#36wk_M4       0       0       0       0       0       0   57099
+#59wk_F2       0       0       0   80830       0       0       0
+#59wk_F3       0       0       0       0       0       0   68186
+#59wk_F5       0       0       0       0   49701       0       0
+#59wk_M1       0       0       0   64001       0       0       0
+#59wk_M3       0       0       0       0       0   64106       0
+#59wk_M5       0       0       0       0       0       0   71959
+#92wk_F2       0       0       0   72664       0       0       0
+#92wk_F3       0       0       0       0   66941       0       0
+#92wk_F5       0       0       0       0       0       0   70278
+#92wk_M1       0       0   54198       0       0       0       0
+#92wk_M2       0       0       0   73868       0       0       0
+#92wk_M3       0       0       0       0   73824       0       0
+
+
+
+# which FOV belongs to which samples? 
+# List all FOVs and which sample_IDs they contain
+for (img_name in Images(SpaNorm_RPCA.obj)) {
+  cells_in_fov <- Cells(SpaNorm_RPCA.obj@images[[img_name]])
+  sample_ids   <- unique(SpaNorm_RPCA.obj$sample_ID[cells_in_fov])
+  cat(img_name, "→", sample_ids, "\n")
+}
+
+#fov → 92wk_M1
+#fov.2 → 59wk_F2
+#fov.2.3 → 92wk_M2
+#fov.2.4 → 59wk_M1
+#fov.2.5 → 92wk_F2
+#fov.3 → 36wk_M2
+#fov.3.7 → 36wk_F1
+#fov.3.8 → 16wk_M1
+#fov.4 → 36wk_M1
+#fov.4.10 → 16wk_M2
+#fov.4.11 → 16wk_F1
+#fov.5 → 92wk_M3
+#fov.5.13 → 92wk_F3
+#fov.5.14 → 59wk_F5
+#fov.5.15 → 16wk_M4
+#fov.6 → 16wk_F4
+#fov.6.17 → 59wk_M3
+#fov.6.18 → 36wk_F3
+#fov.7 → 92wk_F5
+#fov.7.20 → 36wk_F4
+#fov.7.21 → 59wk_M5
+#fov.7.22 → 59wk_F3
+#fov.7.23 → 36wk_M4
+#fov.7.24 → 16wk_F2
+
+
+# imagedimplot each fov to find 16wk_F2
+fov7_imgdim <- ImageDimPlot(SpaNorm_RPCA.obj, 
+             group.by = "fine_celltype", 
+             cols = fine_col_palette, 
+             dark.background = F, 
+             fov = "fov.7") +
+                      labs(fill = NULL)
+
+fov7_20_imgdim <- ImageDimPlot(SpaNorm_RPCA.obj,
+              group.by = "fine_celltype",
+              cols = fine_col_palette,
+              dark.background = F,
+              fov = "fov.7.20") +
+                       labs(fill = NULL)
+
+
+fov7_21_imgdim <- ImageDimPlot(SpaNorm_RPCA.obj,
+              group.by = "fine_celltype",
+              cols = fine_col_palette,
+              dark.background = F,
+              fov = "fov.7.21") +
+                       labs(fill = NULL)
+
+
+
+fov7_22_imgdim <- ImageDimPlot(SpaNorm_RPCA.obj,
+              group.by = "fine_celltype",
+              cols = fine_col_palette,
+              dark.background = F,
+              fov = "fov.7.22") +
+                       labs(fill = NULL)
+
+fov7_23_imgdim <- ImageDimPlot(SpaNorm_RPCA.obj,
+              group.by = "fine_celltype",
+              cols = fine_col_palette,
+              dark.background = F,
+              fov = "fov.7.23") +
+                       labs(fill = NULL)
+
+                   
+fov7_24_imgdim <- ImageDimPlot(SpaNorm_RPCA.obj,
+              group.by = "fine_celltype",
+              cols = fine_col_palette,
+              dark.background = F,
+              fov = "fov.7.24") +
+                       labs(fill = NULL)
+
+
+fov7_24_imgdim_split <- ImageDimPlot(SpaNorm_RPCA.obj,
+              group.by = "fine_celltype",
+              split.by = "fine_celltype",
+              cols = fine_col_palette,
+              dark.background = F,
+              fov = "fov.7.24") +
+                       labs(fill = NULL)
+
+# save figs 
+ggsave(filename = paste0(date, "fov7_imgdim.png"), plot = fov7_imgdim, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "fov7_20_imgdim.png"), plot = fov7_20_imgdim, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "fov7_21_imgdim.png"), plot = fov7_21_imgdim, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "fov7_22_imgdim.png"), plot = fov7_22_imgdim, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "fov7_23_imgdim.png"), plot = fov7_23_imgdim, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "fov7_24_imgdim.png"), plot = fov7_24_imgdim, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "fov7_24_imgdim_split.png"), plot = fov7_24_imgdim_split, path = fig_path, height = 8, width = 11, dpi = 600)
+
+# subsetting to cells in rep brain (16wk_F2) 
+rep.obj <- subset(SpaNorm_RPCA.obj, subset = sample_ID == "16wk_F2")
+
+# reattaching image
+rep.obj@images[["fov.7"]] <- SpaNorm_RPCA.obj@images[["fov.7"]]
+
+# Then subset the FOV to only the cells in rep.obj
+rep.obj@images[["fov.7"]] <- subset(rep.obj@images[["fov.7"]], 
+#                                     cells = Cells(rep.obj))
+# Then verify images transferred
+Images(rep.obj)
+
+## rep fine imagedim plot of 16wk F2 brain ----
+rep_imagedim <- ImageDimPlot(rep.obj,
+                              group.by = "fine_celltype",
+                              cols = fine_col_palette,
+                              dark.background = F
+                             # ,fov = "fov.7"
+                              ) + labs(fill = NULL)
+
+
 ## gen split imgdimplot ----
 fine_imagedim_splitfov1 <- ImageDimPlot(SpaNorm_RPCA.obj,
                               group.by = "fine_celltype",
@@ -261,13 +423,15 @@ fine_imagedim_splitfov1 <- ImageDimPlot(SpaNorm_RPCA.obj,
 
 
 # dimplots
-#ggsave(filename = paste0(date, "gen_cell_UMAP.png"), plot = gen_UMAP, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "gen_cell_UMAP.png"), plot = gen_UMAP, path = fig_path, height = 8, width = 11, dpi = 600)
 ggsave(filename = paste0(date, "fine_cell_UMAP.png"), plot = fine_UMAP, path = fig_path, height = 8, width = 11, dpi = 600)
 
-#ggsave(filename = paste0(date, "gen_imagedim_fov1.png"), plot = gen_imagedim_fov1, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "gen_imagedim_fov1.png"), plot = gen_imagedim_fov1, path = fig_path, height = 8, width = 11, dpi = 600)
 ggsave(filename = paste0(date, "fine_imagedim_fov1.png"), plot = fine_imagedim_fov1, path = fig_path, height = 8, width = 11, dpi = 600)
 ggsave(filename = paste0(date, "gen_imagedim_splitfov1.png"), plot = gen_imagedim_splitfov1, path = fig_path, height = 8, width = 11, dpi = 600)
 ggsave(filename = paste0(date, "fine_imagedim_splitfov1.png"), plot = fine_imagedim_splitfov1, path = fig_path, height = 8, width = 11, dpi = 600)
+ggsave(filename = paste0(date, "rep_imagedim.png"), plot = rep_imagedim, path = fig_path, height = 8, width = 11, dpi = 600)
+
 
 # save obj with updated factor levels and updated L3 ET name
 qs_save(SpaNorm_RPCA.obj, paste0(output_path, date, "SpaNorm_RPCA.qs2"))
@@ -295,17 +459,25 @@ fine_propeller_results <- propeller(
   transform = "logit"
 )
 
+
+# create celltype column before saving as csv 
+gen_propeller_results <- gen_propeller_results %>% 
+    rownames_to_column("CellType")
+
+fine_propeller_results <- fine_propeller_results %>%
+    rownames_to_column("CellType")
+
 # save propeller stats ----
 write_csv(gen_propeller_results, paste0(cellprops_outputpath, date, "gencelltype_props_stats.csv"))
 write_csv(fine_propeller_results, paste0(cellprops_outputpath, date, "finecelltype_props_stats.csv"))
 
 
 
-#gen_props <- getTransformedProps(
-#  clusters = SpaNorm_RPCA.obj$gen_celltype,
-#  sample   = SpaNorm_RPCA.obj$sample_ID,
-#  transform = "logit"   # match what you used in propeller
-#)
+gen_props <- getTransformedProps(
+  clusters = SpaNorm_RPCA.obj$gen_celltype,
+  sample   = SpaNorm_RPCA.obj$sample_ID,
+  transform = "logit"   # match what you used in propeller
+)
 
 fine_props <- getTransformedProps(
   clusters = SpaNorm_RPCA.obj$fine_celltype,
@@ -314,6 +486,6 @@ fine_props <- getTransformedProps(
 )
 
 # save props objs as qs2 files 
-#qs_save(gen_props, paste0(cellprops_outputpath, date, "gencelltype_props.qs2"))
+qs_save(gen_props, paste0(cellprops_outputpath, date, "gencelltype_props.qs2"))
 
 qs_save(fine_props, paste0(cellprops_outputpath, date, "finecelltype_props.qs2"))

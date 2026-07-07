@@ -3,18 +3,10 @@
 # Project: Wildtype Aging Cerebral Metabolism
 # Purpose: Analysis of 4 different age groups (16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
 #         - SpaNorm RPCA 06. renaming clusters to cell types, and adding regional annotations 
-#             - 01 
-#             - 02 
-#             - 03 
-#             - 04 
-#             - 05 
-#             - 06  
-#             - 07 
-#             - 08  
 # Input Files:   
 # Final Output Files: 
 # Date created: 6/11/26
-# Last updated: 6/15/26
+# Last updated: 7/7/26
 # Author: Chloe Lucido
 ########################################################################
 
@@ -77,10 +69,10 @@ XE_ann_path <- "/mnt/gpfs3_amd/pscratch/lajo247_uksr/WTAgingXMet/XE_regional_ann
 date <- "20260612_"
 
 #######################
-
-# first half of script (gen_celltype and regional annotations addns) done on 6/12/26
-# second half of script (fine_celltype annotations) done on 6/15/26
-# did not rename the final obj because it did not majorly change 
+# NOTES: 
+## first half of script (gen_celltype and regional annotations addns) done on 6/12/26
+## second half of script (fine_celltype annotations) done on 6/15/26
+## did not rename the final obj because it did not majorly change 
 
 # 01. Read in SpaNorm RPCA processed obj (no subcluster metadata bc i am not using them) ---- 
 SpaNorm_RPCA.obj <- qs_read(input_obj)
@@ -131,8 +123,8 @@ SpaNorm_RPCA.obj <- RenameIdents(SpaNorm_RPCA.obj,
 SpaNorm_RPCA.obj <- subset(SpaNorm_RPCA.obj, idents = "TRASH", invert = T)
 
 # Note:
-# combined, clusters 30, 32 and 33 have 4328 cells
-# these clusters make up ~0.2% of all cells so I am not renormalizing or scaling
+## combined, clusters 30, 32 and 33 have 4328 cells
+## these clusters make up ~0.2% of all cells so I am not renormalizing or scaling
 
 ## 02d. quick dimplot for annotation confirmation -----
 UMAP_1 <- DimPlot(SpaNorm_RPCA.obj, label = T, cols = "polychrome")
@@ -255,7 +247,7 @@ SpaNorm_RPCA.obj <- RenameIdents(SpaNorm_RPCA.obj,
                                   "19" = "Vascular mural",
                                   "20" = "L5/6 NP neuron",
                                   "21" = "Pericyte",
-                                  "22" = "L3 ET Neuron",
+                                  "22" = "L3 ET neuron",
                                   "23" = "Ependymal cell",
                                   "24" = "L5/6 NP neuron",
                                   "25" = "Hippocampal neuron",
