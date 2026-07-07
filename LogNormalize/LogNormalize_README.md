@@ -7,7 +7,9 @@
 **Purpose:** Analysis of 4 different age groups(16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data        
 
 **Notes:**              
-- MCC denotes scripts run using the supercomputer 
+- MCC denotes scripts run using the supercomputer
+
+## Scripts:      
 
 ## **LogNormalize/**         
           
