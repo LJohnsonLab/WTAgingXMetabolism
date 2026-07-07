@@ -8,7 +8,7 @@
 
 **Notes:**              
 - MCC denotes scripts run using the supercomputer
-- 
+
 ## Scripts:      
 
 ### **SCT/**    
