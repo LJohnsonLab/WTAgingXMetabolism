@@ -11,7 +11,7 @@
 
 ## Scripts:      
 
-## **LogNormalize/**         
+### **LogNormalize/**         
           
 **- _02._** Merging all objs and processing (NormalizeData->FindVariableFeatures->ScaleData)    
 **- _03._** Annotating all cells on log normalize and scaled obj                   
