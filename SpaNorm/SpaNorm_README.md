@@ -24,10 +24,10 @@
 **- _MCC_SpaNorm_RPCA 06._** renaming clusters and adding old (from 6/11 and before) XE regional annotations        
 **- _MCC_SpaNorm_RPCA 07._** making pretty figures for ICBEM and calculating cell proportions          
 **- _SpaNorm_RPCA 08._** stats on cell proportions and making cell proportions line graphs         
-**- _MCC_SpaNorm_RPCA 09._** metabolic pathway scoring (global and cell-specific z-scores and mean expression)
-**- _SpaNorm_RPCA 10._** metabolic pathway score figures       
-**- _MCC_SpaNorm_RPCA 11._** subsetting, subclustering and annotating astrocytes          
-**- _MCC_SpaNorm_RPCA 12._** astro obj: metabolic pathway scoring and making pretty figs (dim plots)
-**- _SpaNorm_RPCA 13._** astro obj: metabolic pathway figures
+**- _MCC_SpaNorm_RPCA 09._** metabolic pathway scoring (global and cell-specific z-scores and mean expression)          
+**- _SpaNorm_RPCA 10._** metabolic pathway score figures              
+**- _MCC_SpaNorm_RPCA 11._** subsetting, subclustering and annotating astrocytes                 
+**- _MCC_SpaNorm_RPCA 12._** astro obj: metabolic pathway scoring and making pretty figs (dim plots)         
+**- _SpaNorm_RPCA 13._** astro obj: metabolic pathway figures          
 
 **Important Notes:**    
