@@ -1,15 +1,15 @@
-########################################################################
-# Name: CCL_ST_RCTD_WTAgingXMet_02.py
-# Project: Wildtype Aging Cerebral Metabolism
-# Purpose: Analysis of 4 different age groups (16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
-#         -  02.  building anndata obj for RCTD analysis   
-# Input Files:   
-# Final Output Files: 
-# Kernel: scverse_env (Python 3.11.14)
-# Date created: 7/16/26
-# Last updated: 7/23/26
-# Author: Chloe Lucido
-########################################################################
+'''
+Name: CCL_ST_RCTD_WTAgingXMet_02.py
+Project: Wildtype Aging Cerebral Metabolism
+Purpose: Analysis of 4 different age groups (16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
+        -  02.  building anndata obj for RCTD analysis   
+Input Files:   
+Final Output Files: 
+Kernel: scverse_env (Python 3.11.14)
+Date created: 7/16/26
+Last updated: 7/23/26
+Author: Chloe Lucido
+'''
 
 from rctd import Reference, run_rctd
 import anndata as ad
@@ -19,6 +19,7 @@ import pandas as pd
 import numpy as np
 import spatialdata as sd
 from spatialdata_io import xenium
+from pathlib import Path
 
 # settings for saving as h5ad 
 pd.set_option("future.infer_string", False) # prevents pandas from making pyarrow-backed string columns in first place 
@@ -34,7 +35,10 @@ slide039_path = '/Volumes/JOHNSON-L/07. Xenium Spatial Transcriptomics/2 Aging_M
 slide045_path = '/Volumes/JOHNSON-L/07. Xenium Spatial Transcriptomics/2 Aging_Metab_Xenium/Run4_20250919__205218__20250919_AgingXMetabolism_4/Slide2_output-XETG00118__0069045__Region_1__20250919__205229'
 slide118_path = '/Volumes/JOHNSON-L/07. Xenium Spatial Transcriptomics/2 Aging_Metab_Xenium/Run5_20260306_210910_20260306_AgingXMetabolism_5/slide1_output-XETG00118__0069118__Region_1__20260306__210910'
 seurat_metadata = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/csv/metadata/20260722_mergedobj_metadata_for_pyRCTD.csv"
-merged_adata_path = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/obj_files/RCTD_SPLIT/20260722_merged.h5ad"
+output_path = "/Users/cclu223/Desktop/WT_AgingXMet/Xenium_Analysis/obj_files/RCTD_SPLIT/"
+DATE = "20260722_" 
+
+merged_adata_path = Path(OUTPUT_DIR) / f"{DATE}merged.h5ad"
 ###################
 
 # 01. build WTAgingXMet anndata obj ----
