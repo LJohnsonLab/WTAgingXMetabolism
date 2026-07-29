@@ -1,5 +1,5 @@
 '''
-Name: CCL_ST_RCTD_WTAgingXMet_02.py
+Name: CCL_ST_adataobj_WTAgingXMet_02.py
 Project: Wildtype Aging Cerebral Metabolism
 Purpose: Analysis of 4 different age groups (16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data  
         -  02.  building anndata obj for RCTD analysis   
@@ -7,7 +7,7 @@ Input Files:
 Final Output Files: 
 Kernel: scverse_env (Python 3.11.14)
 Date created: 7/16/26
-Last updated: 7/23/26
+Last updated: 7/28/26
 Author: Chloe Lucido
 '''
 
