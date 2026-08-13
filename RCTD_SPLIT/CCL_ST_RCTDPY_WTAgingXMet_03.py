@@ -204,7 +204,12 @@ def export_rctdpy_for_reconstruction(xe, result, reference_h5ad, cell_type_col, 
     profiles = profiles.loc[cell_type_names]
  
     with h5py.File(save_dir / "reference_profiles.h5", "w") as f:
-        f.create_dataset("profiles", data=profiles.to_numpy())
+        # Written as genes x cell_types deliberately: rhdf5::h5read() on the
+        # R side reverses axis order by default (no native=TRUE in the
+        # reconstruct function), so writing pre-transposed here makes it
+        # come back as cell_types x genes in R, matching what that function
+        # assumes before its own t(prof) call.
+        f.create_dataset("profiles", data=profiles.to_numpy().T)
         f.create_dataset(
             "cell_type_names",
             data=np.asarray(profiles.index.tolist(), dtype="S"),
@@ -217,6 +222,7 @@ def export_rctdpy_for_reconstruction(xe, result, reference_h5ad, cell_type_col, 
           f"({n_weights} cells, {len(cell_type_names)} cell types)")
  
  
+export_save_dir = Path(output_path) / f"{DATE}rctd_results_xe_Subcluster"
 export_rctdpy_for_reconstruction(
     xe=spatial,
     result=result,
@@ -224,3 +230,4 @@ export_rctdpy_for_reconstruction(
     cell_type_col="Subcluster",
     save_dir=str(export_save_dir),
 )
+ 
