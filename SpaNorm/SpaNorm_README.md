@@ -1,7 +1,7 @@
 # WTAgingXMetabolism           
 
 **Date created:** 7/7/26    
-**Last Updated:** 7/10/26    
+**Last Updated:** 8/21/26    
 **Author:** Chloe Lucido     
 **Project:** Wildtype Aging Cerebral Metabolism         
 **Purpose:** Analysis of 4 different age groups(16-, 36-, 59-, and 92-wks; n=3M / 3F per group) of WT mice Xenium ST data        
@@ -28,6 +28,9 @@
 **- _SpaNorm_RPCA 10._** metabolic pathway score figures              
 **- _MCC_SpaNorm_RPCA 11._** subsetting, subclustering and annotating astrocytes                 
 **- _MCC_SpaNorm_RPCA 12._** astro obj: metabolic pathway scoring and making pretty figs (dim plots)         
-**- _SpaNorm_RPCA 13._** astro obj: metabolic pathway figures          
+**- _SpaNorm_RPCA 13._** astro obj: metabolic pathway figures      
+**- _MCC_SpaNorm_RPCA 14._** subset, subclustered and annotated immune-vascular cell types for qual. research proposal prelim data          
+**- _MCC_SpaNorm_RPCA 15._** making pretty figures, running propeller analysis, and metabolic scoring             
+**- _SpaNorm_RPCA 16._** making cell proportion line graphs and metabolic pathway score heatmaps                
 
 **Important Notes:**    
