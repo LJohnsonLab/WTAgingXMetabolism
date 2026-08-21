@@ -95,7 +95,7 @@ subcluster_to_broadcluster <- c(
 # convert class_df into dataframe and set rownames
 class_df <- data.frame(class = subcluster_to_broadcluster, row.names = names(subcluster_to_broadcluster))
 
-# constructing rctd-py into a spacexr S4 object and runs SPLIT post-processing pipeline 
+# constructing rctd-py into a spacexr S4 object and runs RCTD post-processing pipeline 
 rctd <- reconstruct_rctd_from_rctdpy(rctdpy_out_dir, class_df = class_df)
 
 # save rctd obj
